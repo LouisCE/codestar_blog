@@ -1,9 +1,16 @@
 from django.shortcuts import render
 from .models import About
-
-# Create your views here.
-
+from .forms import CollaborateForm
 
 def about_me(request):
     about = About.objects.all().order_by('-updated_on').first()
-    return render(request, "about/about.html", {"about": about})
+    collaborate_form = CollaborateForm()
+
+    return render(
+        request,
+        "about/about.html",
+        {
+            "about": about,
+            "collaborate_form": collaborate_form,
+        },
+    )
